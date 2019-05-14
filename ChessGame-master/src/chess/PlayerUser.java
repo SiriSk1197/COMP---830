@@ -1,0 +1,99 @@
+package chess;
+
+import java.util.ArrayList;
+
+import chess.ChessGUI.ClickListener;
+
+public class PlayerUser implements Player, ClickListener
+{
+	ChessGUI	gui;
+	GameBoard	board;
+	Move		move;
+	int			playerColor;
+
+	public PlayerUser(int playerColor)
+	{
+		this.playerColor = playerColor;
+		gui = new ChessGUI(this, playerColor);
+	}
+
+	public void update(GameBoard board)
+	{
+		gui.updateBoard(board);
+	}
+
+	public Move makeMove(GameBoard b)
+	{
+		board = b;
+		synchronized (this)
+		{
+			try
+			{
+				wait();
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		board = null;
+		return move;
+	}
+
+	Position		selectedPosition;
+	ArrayList<Move>	possibleMoves;
+
+	@Override
+	public void onClick(Position position)
+	{
+		if (board == null)
+		{
+			return;
+		}
+
+		if (!board.isEmpty(position) && board.getPiece(position).getColor() == playerColor)
+		{
+			if (selectedPosition == position)
+			{
+				selectedPosition = null;
+				gui.clearReachablity();
+				return;
+			}
+			possibleMoves = MoveHelper.getAllMoves4Piece(board, position, false);
+			if (!possibleMoves.isEmpty())
+			{
+				gui.clearReachablity();
+				selectedPosition = position;
+				gui.setReachablity(possibleMoves);
+			}
+		}
+		else if (selectedPosition == null)
+		{
+			return;
+		}
+		else
+		{
+			for (Move m : possibleMoves)
+			{
+				if (m.getDestPosition() == position)
+				{
+					gui.clearReachablity();
+					move = m;
+					synchronized (this)
+					{
+						notifyAll();
+					}
+					return;
+				}
+			}
+
+		}
+
+	}
+	
+	@Override
+	public int getColor() {
+		return playerColor;
+	}
+
+}
