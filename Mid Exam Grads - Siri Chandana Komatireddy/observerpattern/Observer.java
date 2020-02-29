@@ -6,3 +6,5 @@ public long getID();
 	
 	public Event notify(Event e);
 }
+
+public
