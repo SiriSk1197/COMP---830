@@ -1,0 +1,48 @@
+<body style="background-color:powderblue;">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                    <img style="max-width:60px; margin-top: -15px;"
+                         src="images/sc.jpg">
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav"></ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ui-sref="login" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <center>
+        <div>
+            <h1>
+                Results  <img style="max-width:200px; margin-top: -15px;"
+                              src="images/sc6.jpg">
+            </h1>
+            
+            <div> Score: {{playCtrl.score}} </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <button class="button" ng-click="playCtrl.newGame()">New game</button>
+
+            <br /><br /><br />
+        </div>
+    </center>
+    </body>

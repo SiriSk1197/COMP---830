@@ -1,0 +1,91 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                <img style="max-width:60px; margin-top: -15px;"
+                     src="images/sc.jpg">
+            </a>
+              <div style="color:white"> Welcome {{dashCtrl.player.firstName}} </div> 
+        </div>
+        <div class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav"></ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="login" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div></div><br />
+<div class="text-center" ng-show="dashCtrl.showChallengeStart">
+    <h4 style="font-size:400%;
+    margin-top: 80px;
+    margin-bottom: 10px;
+    margin-left: 90px;">
+        Start the game Challenge
+        <img style="max-width:200px; margin-top: -15px;"
+             src="images/sc1.jpg">
+
+    </h4>
+    <style>
+        #time {
+            font-size: 30px;
+        }
+    </style>
+
+    <h1>Set of Rules</h1>
+
+    <p>
+        A player gets three sets of A-Z characters to create their synonyms from. Once the player is ready, he/she clicks on the start game button. Once the challenge starts,<br> there is timer with 60 seconds to finish the challenge. The timer will tick for 60 seconds. When the game starts, a new word is displayed on the screen. The player will have three <br> text boxes to enter the synonyms that they can think of. Once the players think they are done, the players have to submit their synonyms by hitting “Submit” button which will <br> be available on the screen.
+        The interesting part of this game is, that there will be points for characters which players use in their synonyms. Each vowel used gets 1 point, and each <br> consonant used gets 2 points. At the end of 60 seconds, the system will take synonym(s) submitted by the player and calculate the total points for the player.
+        If a player does not <br> submit synonym(s) within 60 seconds, he/she will not be able to submit them anymore and the results page will display. On the results page, the system will display score of the player.
+
+    </p>
+    <br />
+    <button class="button" ng-click="dashCtrl.startChallenge()">Start</button>
+</div>
+
+
+<center>
+    <div class="challenge" ng-show="!dashCtrl.showChallengeStart">
+       
+
+        <h1>
+            <b>All The Best </b><br /><br /> <img style="max-width:300px; margin-top: -15px;"
+                                                        src="images/sc2.jpg">
+        </h1>
+        <br />
+
+
+        <form>
+            Synonym Word:  {{dashCtrl.wordDetails.word}}
+            <br>
+            <br />
+            Enter Synonyms:
+            <input type="text" ng-model="dashCtrl.synonym1" > 
+            <input type="text" ng-model="dashCtrl.synonym2" > 
+            <input type="text" ng-model="dashCtrl.synonym3" >
+            <br />
+            <div>
+
+                <br />
+                <span id="timer">
+                    <span id="time"> {{dashCtrl.counter}} </span>Seconds
+                </span>
+            </div>
+            <br />
+            <input ng-click="dashCtrl.submit()" type="submit">
+        </form>
+
+        <br />
+    </div>
+</center>
+
